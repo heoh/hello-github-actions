@@ -10,3 +10,11 @@ jobs:
       - uses: ./action-a
         with:
           MY_NAME: "Mona"
+  mybuild2:
+    name: Hi world action
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: ./action-a
+        with:
+          MY_NAME: "HeoHeo"
