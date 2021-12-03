@@ -1,0 +1,27 @@
+name: A workflow22  # Workflow 이름
+
+# 실행 이벤트 정의
+on:
+  push:      # push 이벤트 발생시 실행할 것입니다.
+  schedule:  # 주기적으로 실행할 것입니다.
+    - cron: '30 5,17 * * *'
+
+# 실행 작업 정의
+jobs:
+  my_first_job:  # 작업 ID
+    name: Hello world action  # 작업 이름, 
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: ./action-a
+        with:
+          MY_NAME: "Mona"
+
+  my_second_job:
+    name: Hi world action
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: ./action-a
+        with:
+          MY_NAME: "HeoHeo"
