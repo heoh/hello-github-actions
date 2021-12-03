@@ -7,11 +7,11 @@ on:
     - cron: '30 5,17 * * *'
 
 # 실행 작업 정의
-jobs:
-  my_first_job:  # 작업 ID
-    name: Hello world action  # 작업 이름, 
-    runs-on: ubuntu-latest
-    steps:
+jobs:                         # Workflow는 여러 Job을 가질 수 있으며, 병렬로 처리됨
+  my_first_job:               # Job ID
+    name: Hello world action  # Job 이름
+    runs-on: ubuntu-latest    # 어떤 머신에서 돌릴지 1)
+    steps:                    # Job은 여러 task를 가질 수 있으며, 직렬로 처리됨
       - uses: actions/checkout@v1
       - uses: ./action-a
         with:
@@ -25,3 +25,6 @@ jobs:
       - uses: ./action-a
         with:
           MY_NAME: "HeoHeo"
+
+# 1) https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#jobsjob_idruns-on
+
