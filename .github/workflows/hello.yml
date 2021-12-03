@@ -1,30 +1,28 @@
-name: A workflow for my Hello World file  # Workflow 이름
+name: My Workflow                       # Workflow 이름
 
 # 실행 이벤트 정의
 on:
-  push:      # push 이벤트 발생시 실행할 것입니다.
-  schedule:  # 주기적으로 실행할 것입니다.
+  push:                                 # push 이벤트 발생시 실행합니다.
+  schedule:                             # 주기적으로 실행합니다.
     - cron: '30 5,17 * * *'
 
 # 실행 작업 정의
-jobs:                         # Workflow는 여러 Job을 가질 수 있으며, 병렬로 처리됨
-  my_first_job:               # Job ID
-    name: Hello world action  # Job 이름
-    runs-on: ubuntu-latest    # 어떤 머신에서 돌릴지 1)
-    steps:                    # Job은 여러 task를 가질 수 있으며, 직렬로 처리됨
-      - uses: actions/checkout@v1
-      - uses: ./action-a
-        with:
-          MY_NAME: "Mona"
+jobs:                                   # Workflow는 여러 Job을 가질 수 있으며, 병렬로 처리됨
+  my_first_job:                         # Job ID
+    name: Hello world action            # Job 이름
+    runs-on: ubuntu-latest              # 어떤 머신에서 돌릴지 1)
+    steps:                              # Job은 여러 task를 가질 수 있으며, 직렬로 처리됨
+      - uses: actions/checkout@v1       # actions/checkout@v1 이라는 미리 정의된 액션 수행
+      - uses: ./action-a                # 해당 repo 내에 정의한 action-a 액션 수행
+        with:                           # 환경변수를 정의할 수 있음. Action의 파라미터
+          MY_NAME: "Mona"               # INPUT_MY_NAME 이라는 환경변수로 전달됨
 
   my_second_job:
     name: Hi world action
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
       - uses: ./action-a
         with:
           MY_NAME: "HeoHeo"
 
 # 1) https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#jobsjob_idruns-on
-
